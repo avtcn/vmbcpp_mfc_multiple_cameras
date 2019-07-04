@@ -6,6 +6,7 @@ Remember copy `\Vimba2.1\VimbaCPP\Bin\Win[32|64]\*.dll` files to `\Build\VS2010\
 * VimbaC.dll  
 * VimbaCPP.dll  
 * VimbaCPPd.dll
+* VimbaImageTransform.dll
 
 
 
