@@ -12,3 +12,8 @@ Remember copy `\Vimba2.1\VimbaCPP\Bin\Win[32|64]\*.dll` files to `\Build\VS2010\
 
 ## Screenshot
 ![](screenshot.png)
+
+
+## Comments
+如果多个相机通过交换机接入电脑的千兆网口，一定要注意此时多台相机的数据是共享一条千兆网的，为避免不稳定，需要合理分配每个相机的带宽；
+对于独立网口连接不同的相机，则不存在此问题。
