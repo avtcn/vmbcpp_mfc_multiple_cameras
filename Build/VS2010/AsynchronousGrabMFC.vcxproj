@@ -104,8 +104,13 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy  $(ProjectDir)..\..\Vimba2.1\VimbaCPP\Bin\Win$(PlatformArchitecture)\*.dll $(ProjectDir)Win$(PlatformArchitecture)\Debug\ /Y
+
+copy  $(ProjectDir)..\..\Vimba2.1\VimbaImageTransform\Bin\Win$(PlatformArchitecture)\*.dll $(ProjectDir)Win$(PlatformArchitecture)\Debug\ /Y
+
+
+</Command>
+      <Message>Copy necessary VimbaC/VimbaCPP/VimbaImageTransform dlls to executing folder.</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
