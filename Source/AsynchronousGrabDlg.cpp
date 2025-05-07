@@ -605,7 +605,7 @@ void CAsynchronousGrabDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrol
 		//m_int 即为当前滑块的值。
 		int m_int =1*pSlidCtrl->GetPos();//取得当前位置值
 		float m_float=(float)m_int;
-		m_ApiController.SetCameraFloatFeature(1,"ExposureTimeAbs",m_float);
+		//m_ApiController.SetCameraFloatFeature(1,"ExposureTimeAbs",m_float);
 	}
 	else if  (pScrollBar->GetDlgCtrlID() == IDC_SLIDER3 )
 	{
@@ -613,7 +613,7 @@ void CAsynchronousGrabDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrol
 		//m_int 即为当前滑块的值。
 		int m_int =1*pSlidCtrl->GetPos();//取得当前位置值
 		float m_float=(float)m_int;
-		m_ApiController.SetCameraFloatFeature(2,"ExposureTimeAbs",m_float);
+		//m_ApiController.SetCameraFloatFeature(2,"ExposureTimeAbs",m_float);
 	}
 
 	CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
@@ -623,14 +623,14 @@ void CAsynchronousGrabDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrol
 void CAsynchronousGrabDlg::OnEnChangeEdit1()
 {
 	UpdateData(TRUE);
-	m_ApiController.SetCameraIntFeature(1,"GevSCPSPacketSize",packetSize1);
+	//m_ApiController.SetCameraIntFeature(1,"GevSCPSPacketSize",packetSize1);
 
 }
 
 void CAsynchronousGrabDlg::OnEnChangeEdit2()
 {
 	UpdateData(TRUE);
-	m_ApiController.SetCameraIntFeature(2,"GevSCPSPacketSize",packetSize2);
+	//m_ApiController.SetCameraIntFeature(2,"GevSCPSPacketSize",packetSize2);
 	
 }
 

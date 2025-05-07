@@ -64,6 +64,7 @@ END
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "AsynchronousGrab.ico"
 
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Dialog
@@ -75,22 +76,22 @@ EXSTYLE WS_EX_APPWINDOW
 CAPTION "AsynchronousGrab (MFC version)"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    PUSHBUTTON      "Start Image Acquisition",IDC_BUTTON_STARTSTOP,193,245,138,14
+    PUSHBUTTON      "Start Image Acquisition",IDC_BUTTON_STARTSTOP,157,245,138,14
     LISTBOX         IDC_LIST_CAMERAS,7,7,143,207,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
     LISTBOX         IDC_LIST_LOG,7,332,601,100,LBS_NOINTEGRALHEIGHT | LBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
-    CONTROL         "",IDC_PICTURE_STREAM,"Static",SS_BLACKFRAME,158,7,211,208
-    CONTROL         "",IDC_PICTURE_STREAM2,"Static",SS_BLACKFRAME,389,7,211,208
-    PUSHBUTTON      "Start Image Acquisition",IDC_BUTTON_STARTSTOP2,413,247,138,14
-    LTEXT           "ExposureTime:",IDC_STATIC,193,279,48,8
-    CONTROL         "",IDC_SLIDER2,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,251,276,81,15
-    LTEXT           "ExposureTime:",IDC_STATIC,415,280,48,8
-    CONTROL         "",IDC_SLIDER3,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,481,277,72,15
-    EDITTEXT        IDC_EDIT1,255,304,46,14,ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "PacketSize:",IDC_STATIC,193,307,38,8
-    PUSHBUTTON      "OpenCamera",IDC_BT_OPENCAM1,193,223,52,14
-    PUSHBUTTON      "OpenCamera",IDC_BT_OPENCAM2,414,222,52,14
-    LTEXT           "PacketSize:",IDC_STATIC,416,307,38,8
-    EDITTEXT        IDC_EDIT2,488,303,46,14,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "",IDC_PICTURE_STREAM,"Static",SS_BLACKFRAME | WS_BORDER,158,7,211,208
+    CONTROL         "",IDC_PICTURE_STREAM2,"Static",SS_BLACKFRAME | WS_BORDER,389,7,211,208
+    PUSHBUTTON      "Start Image Acquisition",IDC_BUTTON_STARTSTOP2,388,247,138,14
+    LTEXT           "ExposureTime:",IDC_STATIC,157,279,48,8
+    CONTROL         "",IDC_SLIDER2,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,215,276,81,15
+    LTEXT           "ExposureTime:",IDC_STATIC,390,280,48,8
+    CONTROL         "",IDC_SLIDER3,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,456,277,72,15
+    EDITTEXT        IDC_EDIT1,219,304,46,14,ES_AUTOHSCROLL | ES_NUMBER | NOT WS_VISIBLE
+    LTEXT           "PacketSize:",IDC_STATIC,157,307,38,8,NOT WS_VISIBLE
+    PUSHBUTTON      "OpenCamera1",IDC_BT_OPENCAM1,157,223,70,14
+    PUSHBUTTON      "OpenCamera2",IDC_BT_OPENCAM2,389,222,70,14
+    LTEXT           "PacketSize:",IDC_STATIC,391,307,38,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_EDIT2,463,303,46,14,ES_AUTOHSCROLL | ES_NUMBER | NOT WS_VISIBLE
 END
 
 
@@ -149,6 +150,17 @@ BEGIN
     END
 END
 #endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ASYNCHRONOUSGRAB_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
 
 #endif    // µÂÓï(µÂ¹ú) resources
 /////////////////////////////////////////////////////////////////////////////
