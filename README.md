@@ -1,7 +1,9 @@
 # mfc_multiple_cameras - Vimba CPP Multiple Cameras Example
 Vimba C++ AsynchronousGrab MFC example with multiple cameras supported.
 
-Support Vimba 6.0 Windows 11.
+* Support Vimba 6.0 Windows 11.
+* Microsoft Visual Studio Community 2022 (64 位) - Current 版本 17.9.6
+
 
 ## Instruction
 ```
@@ -31,7 +33,7 @@ Remember copy `\Vimba2.1\VimbaCPP\Bin\Win[32|64]\*.dll` files to `\Build\VS2010\
 ## 测试
 * Vimba 6.0 on Windows 11.
 * Alvium G1-158
-* Manta G-895b
+* Manta G-895b  @2025年5月7日
 
 
 
