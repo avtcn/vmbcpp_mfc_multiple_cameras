@@ -1,6 +1,8 @@
 # mfc_multiple_cameras - Vimba CPP Multiple Cameras Example
 Vimba C++ AsynchronousGrab MFC example with multiple cameras supported.
 
+Support Vimba 6.0 Windows 11.
+
 ## Instruction
 ```
 Remember copy `\Vimba2.1\VimbaCPP\Bin\Win[32|64]\*.dll` files to `\Build\VS2010\Win32\Debug\` folder:  
@@ -22,6 +24,16 @@ Remember copy `\Vimba2.1\VimbaCPP\Bin\Win[32|64]\*.dll` files to `\Build\VS2010\
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
 ```
+  
+支持 Debug/Release, Win32/x64 等多种编译模式。
+
+
+## 测试
+* Vimba 6.0 on Windows 11.
+* Alvium G1-158
+* Manta G-895b
+
+
 
 ## Screenshot
 ![](screenshot.png)
