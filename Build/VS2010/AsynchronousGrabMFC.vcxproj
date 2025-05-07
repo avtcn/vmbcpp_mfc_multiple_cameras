@@ -99,15 +99,15 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>VimbaCPP.lib;VimbaImageTransform.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(VimbaHome)\VimbaImageTransform\Lib\Win32;$(VimbaHome)\VimbaCPP\Lib\Win32;$(VimbaHome)\ThirdParty\TinyXML\Lib\Win32</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VimbaHome)\VimbaImageTransform\Lib\Win$(PlatformArchitecture);$(VimbaHome)\VimbaCPP\Lib\Win$(PlatformArchitecture);$(VimbaHome)\ThirdParty\TinyXML\Lib\Win$(PlatformArchitecture)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
       <Command>
-        xcopy  "$(VimbaHome)\VimbaCPP\Bin\Win$(PlatformArchitecture)\*.dll"  "$(ProjectDir)Win$(PlatformArchitecture)\Debug\" /Y 
-        xcopy  "$(VimbaHome)\VimbaImageTransform\Bin\Win$(PlatformArchitecture)\*.dll" "$(ProjectDir)Win$(PlatformArchitecture)\Debug\" /Y 
+        xcopy  "$(VimbaHome)\VimbaCPP\Bin\Win$(PlatformArchitecture)\*.dll"  "$(ProjectDir)Win$(PlatformArchitecture)\$(Configuration)\" /Y 
+        xcopy  "$(VimbaHome)\VimbaImageTransform\Bin\Win$(PlatformArchitecture)\*.dll" "$(ProjectDir)Win$(PlatformArchitecture)\$(Configuration)\" /Y 
       </Command>
       <Message>Copy necessary VimbaC/VimbaCPP/VimbaImageTransform dlls to executing folder.</Message>
     </PostBuildEvent>
@@ -120,12 +120,12 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\Source;..\..\..\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Source;..\..;$(VimbaHome)\VimbaImageTransform\Include;$(VimbaHome)\ThirdParty\TinyXML\Include;$(VimbaHome)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_CRTDBG_MAPALLOC</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
+      <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -136,11 +136,18 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>VimbaCPP.lib;VimbaImageTransform.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VimbaHome)\VimbaImageTransform\Lib\Win$(PlatformArchitecture);$(VimbaHome)\VimbaCPP\Lib\Win$(PlatformArchitecture);$(VimbaHome)\ThirdParty\TinyXML\Lib\Win$(PlatformArchitecture)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
+    <PostBuildEvent>
+      <Command>
+        xcopy  "$(VimbaHome)\VimbaCPP\Bin\Win$(PlatformArchitecture)\*.dll"  "$(ProjectDir)x$(PlatformArchitecture)\$(Configuration)\" /Y 
+        xcopy  "$(VimbaHome)\VimbaImageTransform\Bin\Win$(PlatformArchitecture)\*.dll" "$(ProjectDir)x$(PlatformArchitecture)\$(Configuration)\" /Y 
+      </Command>
+      <Message>Copy necessary VimbaC/VimbaCPP/VimbaImageTransform dlls to executing folder.</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
@@ -149,11 +156,11 @@
       <ValidateAllParameters>false</ValidateAllParameters>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\Source;..\..\..\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Source;..\..;$(VimbaHome)\VimbaImageTransform\Include;$(VimbaHome)\ThirdParty\TinyXML\Include;$(VimbaHome)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -164,13 +171,20 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>VimbaCPP.lib;VimbaImageTransform.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VimbaHome)\VimbaImageTransform\Lib\Win$(PlatformArchitecture);$(VimbaHome)\VimbaCPP\Lib\Win$(PlatformArchitecture);$(VimbaHome)\ThirdParty\TinyXML\Lib\Win$(PlatformArchitecture)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
+    <PostBuildEvent>
+      <Command>
+        xcopy  "$(VimbaHome)\VimbaCPP\Bin\Win$(PlatformArchitecture)\*.dll"  "$(ProjectDir)Win$(PlatformArchitecture)\$(Configuration)\" /Y 
+        xcopy  "$(VimbaHome)\VimbaImageTransform\Bin\Win$(PlatformArchitecture)\*.dll" "$(ProjectDir)Win$(PlatformArchitecture)\$(Configuration)\" /Y 
+      </Command>
+      <Message>Copy necessary VimbaC/VimbaCPP/VimbaImageTransform dlls to executing folder.</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -179,13 +193,13 @@
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\Source;..\..\..\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Source;..\..;$(VimbaHome)\VimbaImageTransform\Include;$(VimbaHome)\ThirdParty\TinyXML\Include;$(VimbaHome)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <StringPooling>false</StringPooling>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -194,13 +208,20 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>VimbaCPP.lib;VimbaImageTransform.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VimbaHome)\VimbaImageTransform\Lib\Win$(PlatformArchitecture);$(VimbaHome)\VimbaCPP\Lib\Win$(PlatformArchitecture);$(VimbaHome)\ThirdParty\TinyXML\Lib\Win$(PlatformArchitecture)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
+    <PostBuildEvent>
+      <Command>
+        xcopy  "$(VimbaHome)\VimbaCPP\Bin\Win$(PlatformArchitecture)\*.dll"  "$(ProjectDir)x$(PlatformArchitecture)\$(Configuration)\" /Y 
+        xcopy  "$(VimbaHome)\VimbaImageTransform\Bin\Win$(PlatformArchitecture)\*.dll" "$(ProjectDir)x$(PlatformArchitecture)\$(Configuration)\" /Y 
+      </Command>
+      <Message>Copy necessary VimbaC/VimbaCPP/VimbaImageTransform dlls to executing folder.</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\..\Source\res\AsynchronousGrab.ico" />

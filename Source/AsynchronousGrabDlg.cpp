@@ -375,7 +375,7 @@ void CAsynchronousGrabDlg::CopyToImage2( VmbUchar_t *pInBuffer, VmbPixelFormat_t
     }
 	static const std::string DisplayFormat( "BGR24" );
     //static const std::string DisplayFormat( "BGR24" );
-    Result = VmbSetImageInfoFromString( DisplayFormat.c_str(),DisplayFormat.size(), nWidth,nHeight, &DestinationImage );
+    Result = VmbSetImageInfoFromString( DisplayFormat.c_str(), (VmbUint32_t)DisplayFormat.size(), nWidth,nHeight, &DestinationImage );
     if( VmbErrorSuccess != Result )
     {
         Log( _TEXT( "Error setting destination image info." ),static_cast<VmbErrorType>( Result ) );
@@ -413,7 +413,7 @@ void CAsynchronousGrabDlg::CopyToImage( VmbUchar_t *pInBuffer, VmbPixelFormat_t 
         return;
     }
     static const std::string DisplayFormat( "RGB24" );
-    Result = VmbSetImageInfoFromString( DisplayFormat.c_str(),DisplayFormat.size(), nWidth,nHeight, &DestinationImage );
+    Result = VmbSetImageInfoFromString( DisplayFormat.c_str(), (VmbUint32_t)DisplayFormat.size(), nWidth,nHeight, &DestinationImage );
     if( VmbErrorSuccess != Result )
     {
         Log( _TEXT( "Error setting destination image info." ),static_cast<VmbErrorType>( Result ) );

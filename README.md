@@ -9,9 +9,19 @@ Remember copy `\Vimba2.1\VimbaCPP\Bin\Win[32|64]\*.dll` files to `\Build\VS2010\
 * VimbaCPPd.dll
 * VimbaImageTransform.dll  
 ```
-
-
 已经可以自动处理这些Dll文件的复制工作，无需手动处理：https://github.com/avtcn/mfc_multiple_cameras/commit/a743ba11de9e7280d687cb0da3e642ae41b35ad8
+
+在`Build/VS2010/AsynchronousGrabMFC.vcxproj`文件中，定义
+```xml
+<PropertyGroup Label="Globals">
+    <VimbaHome>C:\Program Files\Allied Vision\Vimba_6.0</VimbaHome>
+    <ProjectGuid>{811FB091-5B0B-4A00-BB71-643E5CA9AE1A}</ProjectGuid>
+    <RootNamespace>AsynchronousGrab</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+    <ProjectName>AsynchronousGrabMFC</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+```
 
 ## Screenshot
 ![](screenshot.png)
