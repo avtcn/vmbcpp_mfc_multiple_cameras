@@ -93,7 +93,7 @@ BOOL CAsynchronousGrabDlg::OnInitDialog()
     VmbErrorType err = m_ApiController.StartUp();
     string_type DialogTitle( _TEXT( "AsynchronousGrab (MFC version) Vimba V" ) );
     SetWindowText( ( DialogTitle+m_ApiController.GetVersion() ).c_str() );
-    Log( _TEXT( "Starting Vimba" ), err );
+    Log( _TEXT( "Starting Vimba " + m_ApiController.GetVersion()), err);
     if( VmbErrorSuccess == err )
     {
         // Initially get all connected cameras
@@ -222,20 +222,31 @@ LRESULT CAsynchronousGrabDlg::OnFrameReady( WPARAM status, LPARAM lParam )
             VmbUchar_t *pBuffer;
             VmbUchar_t *pColorBuffer = NULL;
             VmbErrorType err = pFrame->GetImage( pBuffer );
-            if( VmbErrorSuccess == err )
+            if (VmbErrorSuccess == err)
             {
+                VmbUint64_t nFrameID1;
+                err = pFrame->GetFrameID(nFrameID1);
+                if (VmbErrorSuccess == err)
+                {
+                    CString strFrameID1;
+                    strFrameID1.Format(L"FrameID: %lld", nFrameID1);
+                    SetDlgItemText(IDC_STATIC_FRAME_ID1, strFrameID1);
+                }
+
                 VmbUint32_t nSize;
-                err = pFrame->GetImageSize( nSize );
-                if( VmbErrorSuccess == err )
+                err = pFrame->GetImageSize(nSize);
+                if (VmbErrorSuccess == err)
                 {
                     VmbPixelFormatType ePixelFormat = m_ApiController.GetPixelFormat();
-                    CopyToImage( pBuffer,ePixelFormat, m_Image );
+                    CopyToImage(pBuffer, ePixelFormat, m_Image);
                     // Display it
                     RECT rect;
-                    m_PictureBoxStream.GetWindowRect( &rect );
-                    ScreenToClient( &rect );
-                    InvalidateRect( &rect, false );
+                    m_PictureBoxStream.GetWindowRect(&rect);
+                    ScreenToClient(&rect);
+                    InvalidateRect(&rect, false);
                 }
+
+
             }
         }
         else
@@ -270,6 +281,15 @@ LRESULT CAsynchronousGrabDlg::OnFrameReady2( WPARAM status, LPARAM lParam )
             VmbErrorType err = pFrame->GetImage( pBuffer );
             if( VmbErrorSuccess == err )
             {
+                VmbUint64_t nFrameID2;
+                err = pFrame->GetFrameID(nFrameID2);
+                if (VmbErrorSuccess == err)
+                {
+                    CString strFrameID2;
+                    strFrameID2.Format(L"FrameID: %lld", nFrameID2);
+                    SetDlgItemText(IDC_STATIC_FRAME_ID2, strFrameID2);
+                }
+
                 VmbUint32_t nSize;
                 err = pFrame->GetImageSize( nSize );
                 if( VmbErrorSuccess == err )
