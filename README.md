@@ -6,14 +6,23 @@ Vimba C++ AsynchronousGrab MFC example with multiple cameras supported.
 
 
 ## Instruction
-```
+```bash
 Remember copy `\Vimba2.1\VimbaCPP\Bin\Win[32|64]\*.dll` files to `\Build\VS2010\Win32\Debug\` folder:  
 * VimbaC.dll  
 * VimbaCPP.dll  
 * VimbaCPPd.dll
 * VimbaImageTransform.dll  
 ```
-已经可以自动处理这些Dll文件的复制工作，无需手动处理：https://github.com/avtcn/mfc_multiple_cameras/commit/a743ba11de9e7280d687cb0da3e642ae41b35ad8
+已经可以自动处理这些Dll文件的复制工作，无需手动处理：
+```xml
+<PostBuildEvent>
+  <Command>
+    xcopy  "$(VimbaHome)\VimbaCPP\Bin\Win$(PlatformArchitecture)\*.dll"  "$(ProjectDir)Win$(PlatformArchitecture)\$(Configuration)\" /Y 
+    xcopy  "$(VimbaHome)\VimbaImageTransform\Bin\Win$(PlatformArchitecture)\*.dll" "$(ProjectDir)Win$(PlatformArchitecture)\$(Configuration)\" /Y 
+  </Command>
+  <Message>Copy necessary VimbaC/VimbaCPP/VimbaImageTransform dlls to executing folder.</Message>
+</PostBuildEvent>
+```
 
 在`Build/VS2010/AsynchronousGrabMFC.vcxproj`文件中，定义
 ```xml
