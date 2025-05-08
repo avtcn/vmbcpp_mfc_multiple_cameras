@@ -34,7 +34,8 @@ namespace AVT {
 namespace VmbAPI {
 namespace Examples {
 
-enum { NUM_FRAMES = 3, };
+//enum { NUM_FRAMES = 3, };
+enum { NUM_FRAMES = 10, };
 
 ApiController::ApiController()
 // Get a reference to the Vimba singleton

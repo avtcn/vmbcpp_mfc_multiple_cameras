@@ -83,7 +83,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\Source;..\..;$(VimbaHome)\VimbaImageTransform\Include;$(VimbaHome)\ThirdParty\TinyXML\Include;$(VimbaHome)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Source;..\..\..\..\;$(VimbaHome)\VimbaImageTransform\Include;$(VimbaHome)\ThirdParty\TinyXML\Include;$(VimbaHome)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_CRTDBG_MAPALLOC</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -120,7 +120,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\Source;..\..;$(VimbaHome)\VimbaImageTransform\Include;$(VimbaHome)\ThirdParty\TinyXML\Include;$(VimbaHome)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Source;..\..\..\..\;$(VimbaHome)\VimbaImageTransform\Include;$(VimbaHome)\ThirdParty\TinyXML\Include;$(VimbaHome)\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_CRTDBG_MAPALLOC</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -156,7 +156,7 @@
       <ValidateAllParameters>false</ValidateAllParameters>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\Source;..\..;$(VimbaHome)\VimbaImageTransform\Include;$(VimbaHome)\ThirdParty\TinyXML\Include;$(VimbaHome)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Source;..\..\..\..\;$(VimbaHome)\VimbaImageTransform\Include;$(VimbaHome)\ThirdParty\TinyXML\Include;$(VimbaHome)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -193,7 +193,7 @@
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\Source;..\..;$(VimbaHome)\VimbaImageTransform\Include;$(VimbaHome)\ThirdParty\TinyXML\Include;$(VimbaHome)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Source;..\..\..\..\;$(VimbaHome)\VimbaImageTransform\Include;$(VimbaHome)\ThirdParty\TinyXML\Include;$(VimbaHome)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
