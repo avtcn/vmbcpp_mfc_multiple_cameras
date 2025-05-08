@@ -51,13 +51,16 @@ BEGIN_MESSAGE_MAP( CAsynchronousGrabDlg, CDialog )
     ON_WM_SYSCOMMAND()
     ON_WM_PAINT()
     ON_WM_QUERYDRAGICON()
-    ON_BN_CLICKED( IDC_BUTTON_STARTSTOP, &CAsynchronousGrabDlg::OnBnClickedButtonStartstop )
 
-    // Here we add the event handlers for Vimba events
+    // Buttons to start/stop each camera
+    ON_BN_CLICKED(IDC_BUTTON_STARTSTOP, &CAsynchronousGrabDlg::OnBnClickedButtonStartstop )
+	ON_BN_CLICKED(IDC_BUTTON_STARTSTOP2, &CAsynchronousGrabDlg::OnBnClickedButtonStartstop2)
+
+    // Here we add the event handlers for Vimba events, frame receiving and update images in image boxes
     ON_MESSAGE( WM_FRAME_READY1, OnFrameReady )
 	ON_MESSAGE( WM_FRAME_READY2, OnFrameReady2 )
+
     ON_MESSAGE( WM_CAMERA_LIST_CHANGED, OnCameraListChanged )
-	ON_BN_CLICKED(IDC_BUTTON_STARTSTOP2, &CAsynchronousGrabDlg::OnBnClickedButtonStartstop2)
 	
 	ON_WM_HSCROLL()
 	ON_EN_CHANGE(IDC_EDIT1, &CAsynchronousGrabDlg::OnEnChangeEdit1)
@@ -110,18 +113,20 @@ void CAsynchronousGrabDlg::OnSysCommand( UINT nID, LPARAM lParam )
 {
     if( SC_CLOSE == nID )
     {
-        // if we are streaming stop streaming
+        // if we are streaming, must stop streaming first for each camera
         if( true == m_ApiController.CameraIsOpen1 )
             OnBnClickedBtOpencam1();
 		if( true == m_ApiController.CameraIsOpen2 )
             OnBnClickedBtOpencam2();
-        // Before we close the application we stop Vimba
+
+        // Before we close the application we stop Vimba SDK library
         m_ApiController.ShutDown();
     }
 
     CDialog::OnSysCommand( nID, lParam );
 }
 
+// Button operation for #1 camera
 void CAsynchronousGrabDlg::OnBnClickedButtonStartstop()
 {
     VmbErrorType err;
@@ -158,9 +163,10 @@ void CAsynchronousGrabDlg::OnBnClickedButtonStartstop()
    UpdateContronls();
 }
 
+
+// Button operation for #2 camera
 void CAsynchronousGrabDlg::OnBnClickedButtonStartstop2()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼þÍ¨Öª´¦Àí³ÌÐò´úÂë
 	VmbErrorType err;   
     if( false == m_ApiController.CameraIsAcq2 )
     {     
@@ -209,7 +215,7 @@ LRESULT CAsynchronousGrabDlg::OnFrameReady( WPARAM status, LPARAM lParam )
 {
     if( true == m_ApiController.CameraIsAcq1 )
     {
-        // Pick up frame
+        // Pick up frame for camera #1
         FramePtr pFrame = m_ApiController.GetFrame();
         if( SP_ISNULL( pFrame) )
         {
@@ -224,6 +230,7 @@ LRESULT CAsynchronousGrabDlg::OnFrameReady( WPARAM status, LPARAM lParam )
             VmbErrorType err = pFrame->GetImage( pBuffer );
             if (VmbErrorSuccess == err)
             {
+                // show frame number
                 VmbUint64_t nFrameID1;
                 err = pFrame->GetFrameID(nFrameID1);
                 if (VmbErrorSuccess == err)
@@ -233,6 +240,7 @@ LRESULT CAsynchronousGrabDlg::OnFrameReady( WPARAM status, LPARAM lParam )
                     SetDlgItemText(IDC_STATIC_FRAME_ID1, strFrameID1);
                 }
 
+                // show new frame from camera
                 VmbUint32_t nSize;
                 err = pFrame->GetImageSize(nSize);
                 if (VmbErrorSuccess == err)
@@ -252,7 +260,7 @@ LRESULT CAsynchronousGrabDlg::OnFrameReady( WPARAM status, LPARAM lParam )
         else
         {
             // If we receive an incomplete image we do nothing but logging
-            Log( _TEXT( "Failure in receiving image" ), VmbErrorOther );
+            Log( _TEXT( "Failure in receiving image of camera #1:" ), VmbErrorOther );
         }
 
         // And queue it to continue streaming
@@ -266,7 +274,7 @@ LRESULT CAsynchronousGrabDlg::OnFrameReady2( WPARAM status, LPARAM lParam )
 {
     if( true == m_ApiController.CameraIsAcq2 )
     {
-        // Pick up frame
+        // Pick up frame for camera #2
         FramePtr pFrame = m_ApiController.GetFrame2();
         if( SP_ISNULL( pFrame) )
         {
@@ -281,6 +289,7 @@ LRESULT CAsynchronousGrabDlg::OnFrameReady2( WPARAM status, LPARAM lParam )
             VmbErrorType err = pFrame->GetImage( pBuffer );
             if( VmbErrorSuccess == err )
             {
+                // show frame number
                 VmbUint64_t nFrameID2;
                 err = pFrame->GetFrameID(nFrameID2);
                 if (VmbErrorSuccess == err)
@@ -290,6 +299,7 @@ LRESULT CAsynchronousGrabDlg::OnFrameReady2( WPARAM status, LPARAM lParam )
                     SetDlgItemText(IDC_STATIC_FRAME_ID2, strFrameID2);
                 }
 
+                // show frame in image box 
                 VmbUint32_t nSize;
                 err = pFrame->GetImageSize( nSize );
                 if( VmbErrorSuccess == err )
@@ -307,7 +317,7 @@ LRESULT CAsynchronousGrabDlg::OnFrameReady2( WPARAM status, LPARAM lParam )
         else
         {
             // If we receive an incomplete image we do nothing but logging
-            Log( _TEXT( "Failure in receiving image" ), VmbErrorOther );
+            Log( _TEXT( "Failure in receiving image of camera #2:" ), VmbErrorOther );
         }
 
         // And queue it to continue streaming
@@ -342,14 +352,15 @@ LRESULT CAsynchronousGrabDlg::OnCameraListChanged( WPARAM reason, LPARAM lParam 
         
         bUpdateList = true;
     }
-	if( true == m_ApiController.CameraIsOpen1 )
-        {
-             OnBnClickedBtOpencam1();
-        }
-		if( true == m_ApiController.CameraIsOpen2 )
-        {
-            OnBnClickedBtOpencam2();
-        }
+	if (true == m_ApiController.CameraIsOpen1)
+	{
+		OnBnClickedBtOpencam1();
+	}
+	if (true == m_ApiController.CameraIsOpen2)
+	{
+		OnBnClickedBtOpencam2();
+	}
+
     if( true == bUpdateList )
     {
         UpdateCameraListBox();
@@ -618,7 +629,6 @@ void CAsynchronousGrabDlg::OnPaint()
 
 void CAsynchronousGrabDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 {
-	// TODO: ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌÐò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
 	if( pScrollBar->GetDlgCtrlID() == IDC_SLIDER2 ) 
 	{
 		CSliderCtrl   *pSlidCtrl=(CSliderCtrl*)GetDlgItem(IDC_SLIDER2);
@@ -655,40 +665,54 @@ void CAsynchronousGrabDlg::OnEnChangeEdit2()
 }
 
 void CAsynchronousGrabDlg::OnBnClickedBtOpencam1()
-{	
-	m_ApiController.OpenCloseCamera1(m_cameras[0]);	
-	UpdateContronls();
+{
+	if (m_cameras.size() >= 1)
+	{
+		m_ApiController.OpenCloseCamera1(m_cameras[0]);
+		UpdateContronls();
+	}
+    else
+    {
+		Log(_TEXT("Can not find #1 camera."));
+    }
 }
 
 void CAsynchronousGrabDlg::OnBnClickedBtOpencam2()
 {
-	m_ApiController.OpenCloseCamera2(m_cameras[1]);
-	UpdateContronls();	
+	if (m_cameras.size() >= 2)
+	{
+		m_ApiController.OpenCloseCamera2(m_cameras[1]);
+		UpdateContronls();
+	}
+	else
+	{
+		Log(_TEXT("Can not find #2 camera."));
+	}
 }
 
 void CAsynchronousGrabDlg::UpdateContronls()
 {
 	if (m_ApiController.CameraIsOpen1)//只有相机打开后才能进行相关的参数设置
 	{
-		m_btOpencam1.SetWindowText( _TEXT( "CloseCamera" ) );
+		m_btOpencam1.SetWindowText( _TEXT( "CloseCamera #1" ) );
 		m_ButtonStartStop.EnableWindow(true);		
 		
 		m_Slider1.EnableWindow(true);
 		if (m_ApiController.CameraIsAcq1)//采集状态下PackageSize是不能进行设置的
 		{
-			m_ButtonStartStop.SetWindowText( _TEXT( "Stop Image Acquisition" ) );
+			m_ButtonStartStop.SetWindowText( _TEXT( "Stop Image Acquisition #1" ) );
 			m_packageEidt1.EnableWindow(false);
 		}
 		else
 		{
-		    m_ButtonStartStop.SetWindowText( _TEXT( "Start Image Acquisition" ) );
+		    m_ButtonStartStop.SetWindowText( _TEXT( "Start Image Acquisition #1" ) );
 			m_packageEidt1.EnableWindow(true);
 		}
 	}
 	else
 	{
-		m_btOpencam1.SetWindowText( _TEXT( "OpenCamera" ) );
-		m_ButtonStartStop.SetWindowText( _TEXT( "Start Image Acquisition" ) );
+		m_btOpencam1.SetWindowText( _TEXT( "OpenCamera #1" ) );
+		m_ButtonStartStop.SetWindowText( _TEXT( "Start Image Acquisition #1" ) );
 	    m_ButtonStartStop.EnableWindow(false);
 		m_Slider1.EnableWindow(false);
 		m_packageEidt1.EnableWindow(false);
@@ -696,25 +720,25 @@ void CAsynchronousGrabDlg::UpdateContronls()
 
 	if (m_ApiController.CameraIsOpen2)//只有相机打开后才能进行相关的参数设置
 	{
-		m_btOpencam2.SetWindowText( _TEXT( "CloseCamera" ) );
+		m_btOpencam2.SetWindowText( _TEXT( "CloseCamera #2" ) );
 		m_ButtonStartStop2.EnableWindow(true);		
 		
 		m_Slider2.EnableWindow(true);
 		if (m_ApiController.CameraIsAcq2)//采集状态下PackageSize是不能进行设置的
 		{
-			m_ButtonStartStop2.SetWindowText( _TEXT( "Stop Image Acquisition" ) );
+			m_ButtonStartStop2.SetWindowText( _TEXT( "Stop Image Acquisition #2" ) );
 			m_packageEidt2.EnableWindow(false);
 		}
 		else
 		{
-		    m_ButtonStartStop2.SetWindowText( _TEXT( "Start Image Acquisition" ) );
+		    m_ButtonStartStop2.SetWindowText( _TEXT( "Start Image Acquisition #2" ) );
 			m_packageEidt2.EnableWindow(true);
 		}
 	}
 	else
 	{
-		m_btOpencam2.SetWindowText( _TEXT( "OpenCamera" ) );
-		m_ButtonStartStop2.SetWindowText( _TEXT( "Start Image Acquisition" ) );
+		m_btOpencam2.SetWindowText( _TEXT( "OpenCamera #2" ) );
+		m_ButtonStartStop2.SetWindowText( _TEXT( "Start Image Acquisition #2" ) );
 	    m_ButtonStartStop2.EnableWindow(false);
 		m_Slider2.EnableWindow(false);
 		m_packageEidt2.EnableWindow(false);

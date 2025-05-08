@@ -182,21 +182,27 @@ class ApiController
     //  The version as string
     //
     string_type         GetVersion() const;
+
   private:
     // A reference to our Vimba singleton
     VimbaSystem &m_system;
+
     // The currently streaming camera
     CameraPtr m_pCamera;
     CameraPtr m_pCamera2;
+
     // Every camera has its own frame observer
     IFrameObserverPtr m_pFrameObserver;
 	IFrameObserverPtr m_pFrameObserver2;
+
     // The current pixel format
     VmbInt64_t m_nPixelFormat;
 	VmbInt64_t m_nPixelFormat2;
+
     // The current width
     VmbInt64_t m_nWidth;
 	 VmbInt64_t m_nWidth2;
+
     // The current height
     VmbInt64_t m_nHeight;
 	VmbInt64_t m_nHeight2;
