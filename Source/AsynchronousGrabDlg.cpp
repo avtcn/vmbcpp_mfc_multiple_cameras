@@ -352,6 +352,8 @@ LRESULT CAsynchronousGrabDlg::OnCameraListChanged( WPARAM reason, LPARAM lParam 
         
         bUpdateList = true;
     }
+    // Avoid stopping streaming cameras
+    /*
 	if (true == m_ApiController.CameraIsOpen1)
 	{
 		OnBnClickedBtOpencam1();
@@ -360,6 +362,7 @@ LRESULT CAsynchronousGrabDlg::OnCameraListChanged( WPARAM reason, LPARAM lParam 
 	{
 		OnBnClickedBtOpencam2();
 	}
+    */
 
     if( true == bUpdateList )
     {
